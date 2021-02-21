@@ -21,7 +21,10 @@ class MicropostsController < ApplicationController
 
   # POST /microposts or /microposts.json
   def create
-    @micropost = Micropost.new(micropost_params)
+
+    @micropost = Micropost.new(id: micropost_params[:id], 
+      user_id: micropost_params[:user_id], 
+      content: micropost_params[:content])
 
     respond_to do |format|
       if @micropost.save
@@ -64,6 +67,6 @@ class MicropostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def micropost_params
-      params.require(:micropost).permit(:content, :user, :id)
+      params.require(:micropost).permit(:content, :user_id, :id)
     end
 end
